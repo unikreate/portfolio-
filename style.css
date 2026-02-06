@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #0b0b0f;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: radial-gradient(circle at top, #1a1a2e, #0b0b0f);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    margin: 20px 0;
+    opacity: 0.8;
+}
+
+.hero button {
+    padding: 12px 30px;
+    border: none;
+    background: #6c63ff;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.hero button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #6c63ff;
+}
+
+/* SECTIONS */
+.section {
+    padding: 100px 10%;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.section p {
+    max-width: 700px;
+    opacity: 0.8;
+}
+
+/* SKILL CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(108,99,255,0.15);
+    box-shadow: 0 0 25px rgba(108,99,255,0.3);
+}
