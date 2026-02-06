@@ -1,28 +1,44 @@
-// Smooth enter scroll
-document.getElementById("enterBtn").addEventListener("click", () => {
-    document.getElementById("about").scrollIntoView({
-        behavior: "smooth"
-    });
-});
-
-// Reveal animation on scroll
+/* ===================== SCROLL REVEAL ===================== */
 const sections = document.querySelectorAll(".section");
 
-window.addEventListener("scroll", () => {
-    sections.forEach(section => {
-        const position = section.getBoundingClientRect().top;
-        const screenHeight = window.innerHeight;
+const reveal = () => {
+    const trigger = window.innerHeight * 0.85;
 
-        if (position < screenHeight - 150) {
-            section.style.opacity = 1;
-            section.style.transform = "translateY(0)";
+    sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) {
+            section.classList.add("visible");
         }
     });
-});
+};
 
-// Initial hidden state
-sections.forEach(section => {
-    section.style.opacity = 0;
-    section.style.transform = "translateY(60px)";
-    section.style.transition = "0.8s ease";
+window.addEventListener("scroll", reveal);
+reveal();
+
+/* ===================== HERO BUTTONS ===================== */
+const enterBtn = document.getElementById("enterWorld");
+const contactBtn = document.getElementById("contactMe");
+
+if (enterBtn) {
+    enterBtn.addEventListener("click", () => {
+        document.getElementById("about").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+}
+
+if (contactBtn) {
+    contactBtn.addEventListener("click", () => {
+        document.getElementById("contact").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+}
+
+/* ===================== PARALLAX FEEL ===================== */
+window.addEventListener("mousemove", e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    document.getElementById("world-background").style.transform =
+        `translate(${x}px, ${y}px)`;
 });
