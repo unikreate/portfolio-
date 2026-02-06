@@ -1,4 +1,4 @@
-/* ===================== RESET ===================== */
+/* ===================== GLOBAL RESET ===================== */
 * {
     margin: 0;
     padding: 0;
@@ -11,65 +11,74 @@ html {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: #0b0b0f;
+    background-color: #0b0b0f;
     color: #ffffff;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* ===================== WORLD BACKGROUND ===================== */
+/* ===================== BACKGROUND WORLD ===================== */
 #world-background {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(circle at 20% 20%, rgba(108,99,255,0.15), transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(0,242,255,0.12), transparent 40%);
+        radial-gradient(circle at 15% 20%, rgba(108,99,255,0.18), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(0,242,255,0.14), transparent 40%);
     z-index: -1;
 }
 
 /* ===================== HERO ===================== */
 #hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
 .hero-inner {
-    max-width: 800px;
+    max-width: 900px;
     padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .hero-avatar {
     width: 140px;
     height: 140px;
-    margin: 0 auto 25px;
     border-radius: 50%;
     background: linear-gradient(135deg, #6c63ff, #00f2ff);
-    box-shadow: 0 0 40px rgba(108,99,255,0.6);
+    box-shadow: 0 0 35px rgba(108,99,255,0.6);
+    margin-bottom: 25px;
 }
 
 #hero h1 {
     font-size: 3.2rem;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 #hero p {
+    font-size: 1.05rem;
     opacity: 0.8;
     margin-bottom: 30px;
 }
 
+/* ===================== HERO BUTTONS ===================== */
+.hero-actions {
+    display: flex;
+    gap: 20px;
+}
+
 .hero-actions button {
-    margin: 0 10px;
     padding: 12px 34px;
     border-radius: 30px;
     border: none;
+    background-color: #6c63ff;
+    color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
-    background: #6c63ff;
-    color: white;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .hero-actions button:hover {
@@ -77,31 +86,32 @@ body {
     box-shadow: 0 0 20px #6c63ff;
 }
 
-/* ===================== NAV ===================== */
+/* ===================== NAVIGATION ===================== */
 #main-nav {
     position: sticky;
     top: 0;
-    background: rgba(11,11,15,0.8);
-    backdrop-filter: blur(10px);
     z-index: 10;
+    background: rgba(11,11,15,0.85);
+    backdrop-filter: blur(10px);
 }
 
 #main-nav ul {
+    list-style: none;
     display: flex;
     justify-content: center;
-    list-style: none;
     padding: 15px 0;
 }
 
 #main-nav li {
-    margin: 0 20px;
+    margin: 0 18px;
 }
 
 #main-nav a {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
+    font-weight: 500;
     opacity: 0.7;
-    transition: 0.3s;
+    transition: opacity 0.3s ease;
 }
 
 #main-nav a:hover {
@@ -113,7 +123,7 @@ body {
     padding: 120px 12%;
     opacity: 0;
     transform: translateY(80px);
-    transition: 0.9s ease;
+    transition: all 0.9s ease;
 }
 
 .section.visible {
@@ -134,15 +144,16 @@ body {
 /* ===================== ABOUT ===================== */
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 25px;
+    margin-top: 40px;
 }
 
 .about-box {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
     padding: 30px;
     border-radius: 15px;
-    transition: 0.4s;
+    transition: all 0.4s ease;
 }
 
 .about-box:hover {
@@ -171,7 +182,7 @@ body {
 /* ===================== SERVICES ===================== */
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
 }
 
@@ -179,7 +190,7 @@ body {
     padding: 35px;
     border-radius: 18px;
     background: rgba(255,255,255,0.06);
-    transition: 0.4s;
+    transition: all 0.4s ease;
 }
 
 .service-card:hover {
@@ -190,7 +201,7 @@ body {
 /* ===================== PORTFOLIO ===================== */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
 }
 
@@ -198,8 +209,12 @@ body {
     height: 200px;
     padding: 25px;
     border-radius: 15px;
-    background: linear-gradient(135deg, rgba(108,99,255,0.25), rgba(0,242,255,0.15));
-    transition: 0.4s;
+    background: linear-gradient(
+        135deg,
+        rgba(108,99,255,0.25),
+        rgba(0,242,255,0.15)
+    );
+    transition: transform 0.4s ease;
 }
 
 .portfolio-item:hover {
@@ -237,7 +252,12 @@ body {
     #hero h1 {
         font-size: 2.2rem;
     }
+
     .section {
         padding: 90px 8%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
     }
 }
