@@ -1,0 +1,111 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..b2ab8f6e5c1f0750e18a8f5b4d6f13b03559df3b
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,101 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <title>Creative Orbit | Portfolio</title>
++  <meta name="description" content="A cinematic, unexpected portfolio for a multi-skilled creative: script writer, reel director, graphic designer, and Instagram growth strategist." />
++  <link rel="preconnect" href="https://fonts.googleapis.com" />
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
++  <link rel="stylesheet" href="styles.css" />
++</head>
++<body>
++  <canvas id="starfield" aria-hidden="true"></canvas>
++  <div class="noise" aria-hidden="true"></div>
++
++  <header class="nav glass">
++    <p class="logo">CREATIVE ORBIT</p>
++    <button id="themeToggle" class="chip" aria-label="Toggle theme">Switch Mood</button>
++  </header>
++
++  <main>
++    <section class="hero">
++      <div>
++        <p class="tiny reveal">A portfolio engineered like a story universe</p>
++        <h1 class="reveal">I don't just make content.<br>I design <span>moments people replay.</span></h1>
++        <p class="lead reveal">
++          Multi-disciplinary creator blending <strong>script writing</strong>, <strong>reel direction</strong>,
++          <strong>Instagram page strategy</strong>, and <strong>graphic design</strong> into campaigns that feel fresh,
++          cinematic, and impossible to ignore.
++        </p>
++        <div class="cta-row reveal">
++          <a href="#experience" class="btn">Enter My World</a>
++          <a href="#contact" class="btn ghost">Let's Collaborate</a>
++        </div>
++      </div>
++      <aside class="spotlight glass reveal">
++        <p class="label">CURRENT FOCUS</p>
++        <ul>
++          <li>High-retention reels with narrative arcs</li>
++          <li>Brand aesthetics that convert scrolls into saves</li>
++          <li>Education + creativity + measurable growth</li>
++        </ul>
++      </aside>
++    </section>
++
++    <section id="experience" class="grid-section">
++      <article class="card magnetic reveal">
++        <h2>Script Writing</h2>
++        <p>I write hooks that strike in 1 second, stories that breathe, and endings that trigger comments and shares.</p>
++      </article>
++      <article class="card magnetic reveal">
++        <h2>Direction for Reels</h2>
++        <p>I direct short-form like mini cinema: shot logic, pacing, emotion, and visual rhythm built for attention economy.</p>
++      </article>
++      <article class="card magnetic reveal">
++        <h2>Instagram Management</h2>
++        <p>From content calendars to insight-led iteration, I build pages that grow intentionally—not accidentally.</p>
++      </article>
++      <article class="card magnetic reveal">
++        <h2>Graphic Design</h2>
++        <p>Bold visual systems, consistent branding, and thumb-stopping post design crafted for digital-first storytelling.</p>
++      </article>
++    </section>
++
++    <section class="timeline">
++      <h2 class="reveal">Education & Creative Journey</h2>
++      <div class="path">
++        <article class="milestone reveal">
++          <h3>Foundation</h3>
++          <p>Built strong fundamentals in communication, visual language, and storytelling through formal education and self-practice.</p>
++        </article>
++        <article class="milestone reveal">
++          <h3>Exploration</h3>
++          <p>Experimented with scripts, social formats, and design principles to discover a distinct signature style.</p>
++        </article>
++        <article class="milestone reveal">
++          <h3>Execution</h3>
++          <p>Applied creative direction and strategic publishing in real projects to increase engagement and improve retention.</p>
++        </article>
++      </div>
++    </section>
++
++    <section class="quote glass reveal">
++      <p>“My goal is simple: create content your audience doesn't just watch once—they come back to it.”</p>
++    </section>
++
++    <section id="contact" class="contact reveal">
++      <h2>Let's Build Something Unexpected</h2>
++      <p>If you're searching for someone who understands story + design + audience psychology, let's talk.</p>
++      <a class="btn" href="mailto:hello@creativeorbit.portfolio">Book a Creative Call</a>
++    </section>
++  </main>
++
++  <footer>
++    <p>Made with direction, design, and obsession for engagement.</p>
++  </footer>
++
++  <script src="script.js"></script>
++</body>
++</html>
+ 
+EOF
+)
