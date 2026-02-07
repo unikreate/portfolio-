@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth cursor-none">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amit Kumar Nayak | Creative Director</title>
+    <title>Amit Kumar Nayak | Digital Architect</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,8 +11,8 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Google Fonts: Syne (Artistic Headers) and Manrope (Clean Body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,600,700&f[]=general-sans@200,400,500,600&display=swap" rel="stylesheet">
 
     <!-- Tailwind Config -->
     <script>
@@ -20,29 +20,26 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['Syne', 'sans-serif'],
-                        body: ['Manrope', 'sans-serif'],
+                        display: ['Clash Display', 'sans-serif'],
+                        body: ['General Sans', 'sans-serif'],
                     },
                     colors: {
-                        'beige-main': '#EFEDE6',
-                        'teal-dark': '#0F2C30',
-                        'teal-pop': '#14B8A6',
-                        'teal-light': '#CCFBF1',
-                        'accent-orange': '#FF6B6B', /* Pop color for playful vibe */
+                        'void': '#0e0e0e',
+                        'concrete': '#1a1a1a',
+                        'mist': '#e1e1e1',
+                        'acid': '#D1F207',
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
                     },
                     animation: {
-                        'marquee': 'marquee 20s linear infinite',
-                        'marquee-reverse': 'marquee-reverse 20s linear infinite',
-                        'spin-slow': 'spin 8s linear infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'marquee': 'marquee 25s linear infinite',
                     },
                     keyframes: {
                         marquee: {
                             '0%': { transform: 'translateX(0%)' },
                             '100%': { transform: 'translateX(-100%)' },
-                        },
-                        'marquee-reverse': {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(0%)' },
                         }
                     }
                 }
@@ -51,277 +48,263 @@
     </script>
 
     <style>
-        /* Base Styles */
+        /* CORE STYLES */
         body {
-            background-color: #EFEDE6;
-            color: #0F2C30;
+            background-color: #0e0e0e;
+            color: #e1e1e1;
             cursor: none;
+            overflow-x: hidden;
         }
 
-        /* Custom Cursor */
-        #cursor-dot {
-            width: 12px;
-            height: 12px;
-            background-color: #0F2C30;
-        }
-        #cursor-outline {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #0F2C30;
-        }
-        .cursor-element {
+        /* FILM GRAIN OVERLAY */
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* CUSTOM CURSOR */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background-color: #D1F207;
             border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
             pointer-events: none;
             z-index: 9999;
-            transition: width 0.3s, height 0.3s, background-color 0.3s, transform 0.1s;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, transform 0.1s;
+            mix-blend-mode: exclusion;
         }
-
-        /* Hover State for Cursor */
-        body.hovering #cursor-dot {
-            transform: translate(-50%, -50%) scale(0.5);
-            background-color: #14B8A6;
-        }
-        body.hovering #cursor-outline {
+        body.hovering #cursor {
             width: 80px;
             height: 80px;
-            background-color: rgba(20, 184, 166, 0.1);
-            border-color: #14B8A6;
+            background-color: white;
         }
 
-        /* Reveal Image Floating */
-        .project-preview {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 300px;
-            height: 400px;
-            background-size: cover;
-            background-position: center;
-            z-index: 50;
-            pointer-events: none;
-            border-radius: 12px;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
-            opacity: 0;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        }
-        .project-preview.active {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1) rotate(-5deg);
+        /* SPOTLIGHT CARD EFFECT */
+        .card {
+            position: sticky;
+            top: 100px;
+            height: 500px;
+            margin-bottom: 50px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+            /* Spotlight Gradient Logic */
+            background-color: #1a1a1a;
+            background-image: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y),
+                rgba(255, 255, 255, 0.06),
+                transparent 40%
+            );
         }
 
-        /* Marquee Strip */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-        }
-        .marquee-content {
+        /* MAGNETIC EFFECT UTILITY */
+        .magnetic {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-block;
         }
 
-        /* Text Selection */
-        ::selection {
-            background: #14B8A6;
-            color: #EFEDE6;
+        /* UTILITIES */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            color: transparent;
+            transition: all 0.3s;
+        }
+        .hover-trigger:hover .text-outline {
+            -webkit-text-stroke: 0px;
+            color: #D1F207;
         }
         
-        /* Smooth Reveal Sections */
-        .reveal-text {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        /* IMAGE PARALLAX CONTAINER */
+        .parallax-container {
+            perspective: 1000px;
+            overflow: hidden;
         }
-        .reveal-text span {
-            display: inline-block;
-            transform: translateY(100%);
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .active .reveal-text span {
-            transform: translateY(0);
+        .parallax-image {
+            transition: transform 0.1s ease-out;
+            transform: scale(1.1); /* Slight zoom to allow movement */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
-<body class="font-body overflow-x-hidden">
+<body class="font-body selection:bg-acid selection:text-void">
 
-    <!-- CURSOR -->
-    <div id="cursor-dot" class="cursor-element"></div>
-    <div id="cursor-outline" class="cursor-element"></div>
-
-    <!-- PROJECT PREVIEW CONTAINER (Hidden by default, shows on hover) -->
-    <div id="project-preview" class="project-preview"></div>
+    <div class="noise-overlay"></div>
+    <div id="cursor"></div>
 
     <!-- NAVBAR -->
-    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference text-teal-dark">
-        <a href="#" class="font-display font-extrabold text-2xl tracking-tighter hover-trigger">AMIT<span class="text-teal-pop">.</span></a>
-        
-        <div class="hidden md:flex gap-12 font-bold text-sm uppercase tracking-widest">
-            <a href="#about" class="hover-trigger hover:text-teal-pop transition-colors">About</a>
-            <a href="#work" class="hover-trigger hover:text-teal-pop transition-colors">Work</a>
-            <a href="#contact" class="hover-trigger hover:text-teal-pop transition-colors">Contact</a>
+    <nav class="fixed top-0 w-full px-8 py-6 flex justify-between items-center z-50 mix-blend-difference">
+        <div class="font-display font-bold text-xl tracking-widest text-mist">AMIT NAYAK<span class="text-acid text-2xl">.</span></div>
+        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-mist items-center">
+            <a href="#about" class="hover-trigger hover:text-acid transition-colors magnetic p-2">The Mind</a>
+            <a href="#work" class="hover-trigger hover:text-acid transition-colors magnetic p-2">The Work</a>
+            <a href="mailto:contact@unikreate.in" class="magnetic hover-trigger px-6 py-3 border border-mist rounded-full hover:bg-acid hover:text-void hover:border-acid transition-all duration-300">
+                Let's Talk
+            </a>
         </div>
-
-        <button class="md:hidden hover-trigger">
-            <i data-lucide="menu" class="w-8 h-8"></i>
-        </button>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="min-h-screen flex flex-col justify-center pt-20">
-        <div class="container mx-auto px-6 mb-12 relative z-10">
-            <!-- Small Tag -->
-            <div class="mb-6 flex items-center gap-3 reveal-trigger">
-                <span class="w-3 h-3 bg-teal-pop rounded-full animate-pulse"></span>
-                <span class="font-bold uppercase tracking-widest text-xs reveal-text"><span>Based in India, 16.5 y/o</span></span>
+    <section class="min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 md:px-12 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-acid/5 rounded-full blur-[100px] animate-pulse pointer-events-none"></div>
+
+        <div class="relative z-10">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="px-3 py-1 border border-white/20 rounded-full text-[10px] uppercase tracking-widest animate-pulse border-acid text-acid">
+                    Available for projects
+                </div>
+                <div class="h-[1px] w-20 bg-white/20"></div>
+                <div class="text-xs text-gray-400 uppercase tracking-widest">Based in India • 16.5 y/o</div>
             </div>
 
-            <!-- Massive Header -->
-            <h1 class="font-display font-extrabold text-[12vw] leading-[0.9] tracking-tighter text-teal-dark mix-blend-multiply">
-                <div class="reveal-trigger reveal-text"><span>CREATIVE</span></div>
-                <div class="reveal-trigger reveal-text"><span class="pl-[10vw] text-outline text-transparent" style="-webkit-text-stroke: 2px #0F2C30;">DIRECTOR</span></div>
-                <div class="reveal-trigger reveal-text"><span class="text-teal-pop">& DIGITAL</span></div>
-                <div class="reveal-trigger reveal-text"><span class="pl-[5vw]">PRODIGY</span></div>
+            <h1 class="font-display font-bold text-[13vw] leading-[0.85] tracking-tight uppercase">
+                <div class="hacker-text hover-trigger w-fit" data-value="Digital">Digital</div>
+                <div class="pl-[10vw] text-outline hover-trigger cursor-default hacker-text w-fit" data-value="Architect">Architect</div>
+                <div class="hacker-text hover-trigger w-fit" data-value="& Creator">& Creator</div>
             </h1>
         </div>
 
-        <!-- Marquee Strip -->
-        <div class="w-full bg-teal-dark text-beige-main py-4 border-y-2 border-teal-dark rotate-[-2deg] scale-105 transform origin-center z-20 hover:rotate-0 transition-transform duration-500 cursor-pointer">
-            <div class="marquee-container">
-                <div class="marquee-content animate-marquee font-display font-bold text-4xl uppercase tracking-wider">
-                    Video Direction • Script Writing • Meta Ads • SEO Strategy • Web Development • Graphic Design • UniKreate Founder •&nbsp;
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-8">
+            <div class="max-w-md">
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    I bridge the gap between <span class="text-acid">Cinematic Storytelling</span> and <span class="text-acid">Data-Driven Growth</span>. Founder of UniKreate.
+                </p>
+            </div>
+            <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center animate-bounce magnetic hover-trigger">
+                <i data-lucide="arrow-down" class="w-5 h-5"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE STRIP -->
+    <div class="py-8 bg-acid text-void overflow-hidden border-y border-void rotate-1 origin-left scale-105 z-20 relative">
+        <div class="flex whitespace-nowrap animate-marquee">
+            <span class="text-4xl font-display font-bold uppercase mx-8">Video Direction • Meta Ads • Script Writing • Web Development • SEO •</span>
+            <span class="text-4xl font-display font-bold uppercase mx-8">Video Direction • Meta Ads • Script Writing • Web Development • SEO •</span>
+            <span class="text-4xl font-display font-bold uppercase mx-8">Video Direction • Meta Ads • Script Writing • Web Development • SEO •</span>
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20">
+            <div>
+                <h2 class="font-display text-5xl md:text-7xl font-bold mb-8 hacker-text" data-value="Not your average">Not your average</h2>
+                <h2 class="font-display text-5xl md:text-7xl font-bold mb-8 text-outline text-acid hacker-text" style="-webkit-text-stroke: 1px #D1F207;" data-value="Teenager">Teenager.</h2>
+                
+                <div class="h-[1px] w-full bg-white/10 mb-8"></div>
+                <div class="space-y-6 text-xl text-gray-400">
+                    <p>I started at 15. By 16.5, I've built agencies, directed 100+ Reels, and managed ad budgets that actually convert.</p>
+                    <p>While others study the theory, I'm executing the <strong class="text-acid">practice</strong>. I combine the eye of a director with the brain of a marketer.</p>
                 </div>
-                <div class="marquee-content animate-marquee font-display font-bold text-4xl uppercase tracking-wider" aria-hidden="true">
-                    Video Direction • Script Writing • Meta Ads • SEO Strategy • Web Development • Graphic Design • UniKreate Founder •&nbsp;
+                
+                <div class="mt-12 flex flex-wrap gap-4">
+                    <div class="magnetic px-6 py-3 bg-concrete rounded-lg border border-white/5 hover:border-acid transition-colors cursor-default hover-trigger">
+                        <span class="text-xs text-gray-500 block mb-1">CURRENTLY</span>
+                        <span class="font-bold">Intern @ Kalp Intelligence</span>
+                    </div>
+                    <div class="magnetic px-6 py-3 bg-concrete rounded-lg border border-white/5 hover:border-acid transition-colors cursor-default hover-trigger">
+                        <span class="text-xs text-gray-500 block mb-1">FOUNDER</span>
+                        <span class="font-bold">UniKreate Agency</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative magnetic hover-trigger">
+                <div class="aspect-[3/4] rounded-2xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover" alt="Profile">
+                </div>
+                <!-- Circular Text Badge -->
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-acid rounded-full flex items-center justify-center animate-spin-slow pointer-events-none">
+                    <svg viewBox="0 0 100 100" width="100" height="100" class="w-full h-full">
+                        <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                        <text>
+                            <textPath xlink:href="#circlePath" class="text-[12px] font-bold uppercase tracking-widest fill-void">
+                                • Creative Director • Digital Strategist •
+                            </textPath>
+                        </text>
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT SECTION (Editorial Layout) -->
-    <section id="about" class="py-32 px-6 container mx-auto">
-        <div class="flex flex-col md:flex-row gap-20 items-start">
+    <!-- STACKING PORTFOLIO SECTION -->
+    <section id="work" class="py-20 px-4 md:px-12">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-display text-8xl md:text-[10rem] font-bold text-concrete mb-[-50px] relative z-0 pointer-events-none text-center">WORKS</h2>
             
-            <!-- Left: Sticky Image -->
-            <div class="w-full md:w-5/12 sticky top-10">
-                <div class="relative group reveal-trigger">
-                    <div class="absolute inset-0 bg-teal-pop translate-x-4 translate-y-4 rounded-lg transition-transform group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                    <div class="relative h-[600px] w-full bg-gray-200 rounded-lg overflow-hidden border-2 border-teal-dark">
-                         <!-- Profile Image -->
-                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=1974&auto=format&fit=crop" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Amit">
-                        
-                        <!-- Floating Badge -->
-                        <div class="absolute top-4 right-4 bg-beige-main text-teal-dark px-4 py-2 font-bold rounded-full text-xs uppercase border border-teal-dark animate-spin-slow" style="animation-duration: 10s;">
-                            <svg viewBox="0 0 100 100" width="80" height="80">
-                                <path id="curve" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent"/>
-                                <text width="500">
-                                    <textPath xlink:href="#curve" class="text-[14px] font-bold">
-                                        EST. 2023 • AMIT NAYAK •
-                                    </textPath>
-                                </text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Text Content -->
-            <div class="w-full md:w-7/12 pt-10">
-                <h2 class="font-display font-bold text-6xl mb-12">I speak <span class="text-teal-pop italic">Algorithm.</span></h2>
+            <div class="stack-area space-y-24 pt-20">
                 
-                <p class="text-2xl leading-relaxed mb-8 font-medium">
-                    I started my journey in 2023, diving straight into <strong class="text-teal-pop">Influencer Marketing</strong> right after school. No degree, just pure obsession with how the internet moves.
-                </p>
-
-                <p class="text-xl text-gray-600 leading-relaxed mb-12">
-                    Now, at <strong>16.5 years old</strong>, I'm a full-stack digital threat. I don't just make things look good; I make them perform. From writing scripts that hook audiences to managing ad budgets that convert, I connect the creative with the analytical.
-                </p>
-
-                <!-- Experience List -->
-                <div class="space-y-8 border-l-2 border-teal-dark/20 pl-8">
-                    <div class="hover-trigger group">
-                        <span class="text-xs font-bold uppercase text-teal-pop tracking-widest mb-1 block">Dec 2025 - Present</span>
-                        <h3 class="font-display text-3xl font-bold group-hover:text-teal-pop transition-colors">Marketing Intern @ Kalp Intelligence</h3>
-                        <p class="mt-2 text-gray-500">Mastering AI-driven marketing landscapes.</p>
-                    </div>
-
-                    <div class="hover-trigger group">
-                        <span class="text-xs font-bold uppercase text-gray-500 tracking-widest mb-1 block">Oct - Dec 2025</span>
-                        <h3 class="font-display text-3xl font-bold group-hover:text-teal-pop transition-colors">Creative Specialist @ WebWrite</h3>
-                        <p class="mt-2 text-gray-500">Video Direction & Graphic Design execution.</p>
-                    </div>
-                    
-                     <div class="hover-trigger group">
-                        <span class="text-xs font-bold uppercase text-gray-500 tracking-widest mb-1 block">Founder</span>
-                        <h3 class="font-display text-3xl font-bold group-hover:text-teal-pop transition-colors">UniKreate Agency</h3>
-                        <p class="mt-2 text-gray-500">My personal venture into branding & growth.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SELECTED WORK (Interactive List) -->
-    <section id="work" class="py-32 bg-teal-dark text-beige-main relative cursor-none">
-        <div class="container mx-auto px-6">
-            <div class="flex justify-between items-end mb-20">
-                <h2 class="font-display font-extrabold text-7xl">SELECTED<br><span class="text-teal-pop">WORKS</span></h2>
-                <span class="text-sm font-bold uppercase tracking-widest text-teal-pop border-b border-teal-pop pb-1">2023 - 2026</span>
-            </div>
-
-            <!-- The List -->
-            <div class="border-t border-beige-main/20">
-                
-                <!-- Project 1 -->
-                <a href="https://www.unikreate.in" target="_blank" class="project-item group block py-10 border-b border-beige-main/20 hover:bg-beige-main/5 transition-colors relative" 
-                   data-image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop">
-                    <div class="flex flex-col md:flex-row justify-between items-baseline px-4">
-                        <h3 class="font-display text-4xl md:text-6xl font-bold group-hover:translate-x-4 transition-transform duration-300">UniKreate Agency</h3>
-                        <div class="flex gap-4 mt-2 md:mt-0 font-body text-sm uppercase tracking-widest opacity-60">
-                            <span>Web Dev</span>
-                            <span>•</span>
-                            <span>Branding</span>
+                <!-- CARD 1 -->
+                <div class="card bg-concrete rounded-3xl border border-white/10 overflow-hidden flex flex-col md:flex-row group hover-trigger">
+                    <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-between relative z-10">
+                        <div>
+                            <span class="text-acid font-bold text-sm tracking-widest uppercase mb-4 block">01 / Agency</span>
+                            <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">UniKreate</h3>
+                            <p class="text-gray-400">My brainchild. A full-service digital agency delivering high-converting websites and branding.</p>
+                        </div>
+                        <div class="mt-8">
+                            <div class="flex gap-2 mb-6">
+                                <span class="px-3 py-1 bg-void rounded-full text-xs border border-white/10">Web Dev</span>
+                                <span class="px-3 py-1 bg-void rounded-full text-xs border border-white/10">Branding</span>
+                            </div>
+                            <a href="https://www.unikreate.in" target="_blank" class="inline-flex items-center gap-2 text-acid hover:underline magnetic p-2">Visit Site <i data-lucide="arrow-up-right" class="w-4 h-4"></i></a>
                         </div>
                     </div>
-                </a>
-
-                <!-- Project 2 -->
-                <div class="project-item group block py-10 border-b border-beige-main/20 hover:bg-beige-main/5 transition-colors relative"
-                     data-image="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop">
-                    <div class="flex flex-col md:flex-row justify-between items-baseline px-4">
-                        <h3 class="font-display text-4xl md:text-6xl font-bold group-hover:translate-x-4 transition-transform duration-300">Mountain Doc</h3>
-                        <div class="flex gap-4 mt-2 md:mt-0 font-body text-sm uppercase tracking-widest opacity-60">
-                            <span>Video Direction</span>
-                            <span>•</span>
-                            <span>Script</span>
-                        </div>
+                    <div class="w-full md:w-1/2 bg-void relative overflow-hidden parallax-container">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" class="parallax-image absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
                 </div>
 
-                <!-- Project 3 -->
-                <div class="project-item group block py-10 border-b border-beige-main/20 hover:bg-beige-main/5 transition-colors relative"
-                     data-image="https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=1931&auto=format&fit=crop">
-                    <div class="flex flex-col md:flex-row justify-between items-baseline px-4">
-                        <h3 class="font-display text-4xl md:text-6xl font-bold group-hover:translate-x-4 transition-transform duration-300">Fashion Launch</h3>
-                        <div class="flex gap-4 mt-2 md:mt-0 font-body text-sm uppercase tracking-widest opacity-60">
-                            <span>Meta Ads</span>
-                            <span>•</span>
-                            <span>Strategy</span>
+                <!-- CARD 2 -->
+                <div class="card bg-[#1f1f1f] rounded-3xl border border-white/10 overflow-hidden flex flex-col md:flex-row group hover-trigger">
+                    <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-between relative z-10">
+                        <div>
+                            <span class="text-acid font-bold text-sm tracking-widest uppercase mb-4 block">02 / Video</span>
+                            <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">Mountain Doc</h3>
+                            <p class="text-gray-400">A cinematic documentary exploring the silence of the peaks. Directed and edited by me.</p>
                         </div>
+                        <div class="mt-8">
+                             <div class="flex gap-2 mb-6">
+                                <span class="px-3 py-1 bg-void rounded-full text-xs border border-white/10">Direction</span>
+                                <span class="px-3 py-1 bg-void rounded-full text-xs border border-white/10">Color Grading</span>
+                            </div>
+                            <button class="inline-flex items-center gap-2 text-acid hover:underline magnetic p-2">Watch Preview <i data-lucide="play-circle" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 bg-void relative overflow-hidden parallax-container">
+                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop" class="parallax-image absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
                 </div>
 
-                <!-- Project 4 -->
-                <div class="project-item group block py-10 border-b border-beige-main/20 hover:bg-beige-main/5 transition-colors relative"
-                     data-image="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=2070&auto=format&fit=crop">
-                    <div class="flex flex-col md:flex-row justify-between items-baseline px-4">
-                        <h3 class="font-display text-4xl md:text-6xl font-bold group-hover:translate-x-4 transition-transform duration-300">Echoes Short Film</h3>
-                        <div class="flex gap-4 mt-2 md:mt-0 font-body text-sm uppercase tracking-widest opacity-60">
-                            <span>Cinematography</span>
-                            <span>•</span>
-                            <span>Edit</span>
+                <!-- CARD 3 -->
+                <div class="card bg-[#252525] rounded-3xl border border-white/10 overflow-hidden flex flex-col md:flex-row group hover-trigger">
+                    <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-between relative z-10">
+                        <div>
+                            <span class="text-acid font-bold text-sm tracking-widest uppercase mb-4 block">03 / Marketing</span>
+                            <h3 class="font-display text-4xl md:text-5xl font-bold mb-4">Fashion Launch</h3>
+                            <p class="text-gray-400">Strategized a Meta Ads campaign for a clothing brand that resulted in 4x ROAS.</p>
                         </div>
+                        <div class="mt-8">
+                             <div class="flex gap-2 mb-6">
+                                <span class="px-3 py-1 bg-void rounded-full text-xs border border-white/10">Meta Ads</span>
+                                <span class="px-3 py-1 bg-void rounded-full text-xs border border-white/10">Strategy</span>
+                            </div>
+                            <button class="inline-flex items-center gap-2 text-acid hover:underline magnetic p-2">View Case Study <i data-lucide="file-text" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 bg-void relative overflow-hidden parallax-container">
+                        <img src="https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=1931&auto=format&fit=crop" class="parallax-image absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                     </div>
                 </div>
 
@@ -329,88 +312,91 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="min-h-screen flex flex-col justify-center items-center text-center px-4">
-        <div class="mb-10 hover-trigger">
-            <span class="inline-block px-4 py-2 border border-teal-dark rounded-full text-xs font-bold uppercase tracking-widest">Available for projects</span>
-        </div>
+    <!-- SKILLS GRID (Bento Style) -->
+    <section class="py-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <h2 class="font-display text-4xl font-bold mb-12 hacker-text" data-value="THE ARSENAL">THE <span class="text-acid">ARSENAL</span></h2>
         
-        <h2 class="font-display font-extrabold text-[10vw] leading-none hover:text-teal-pop transition-colors cursor-pointer hover-trigger">
-            LET'S TALK
-        </h2>
-        
-        <div class="flex flex-col md:flex-row gap-8 mt-12 text-lg font-bold underline decoration-2 underline-offset-4">
-            <a href="mailto:amit@unikreate.in" class="hover-trigger hover:text-teal-pop">Email Me</a>
-            <a href="#" class="hover-trigger hover:text-teal-pop">Instagram</a>
-            <a href="#" class="hover-trigger hover:text-teal-pop">LinkedIn</a>
-            <a href="https://www.unikreate.in" class="hover-trigger hover:text-teal-pop">UniKreate</a>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Box 1 -->
+            <div class="magnetic bg-concrete p-8 rounded-2xl border border-white/5 hover:border-acid transition-colors hover-trigger md:col-span-2">
+                <i data-lucide="video" class="w-8 h-8 text-acid mb-4"></i>
+                <h3 class="font-display text-2xl font-bold mb-2">Video Direction & Scripting</h3>
+                <p class="text-gray-400 text-sm">I don't just shoot; I direct the narrative. From storyboard to final cut, I ensure every frame holds attention.</p>
+            </div>
 
-        <footer class="absolute bottom-8 text-xs font-bold opacity-50 uppercase tracking-widest">
-            © 2026 Amit Kumar Nayak • Designed with Style
-        </footer>
+            <!-- Box 2 -->
+            <div class="magnetic bg-concrete p-8 rounded-2xl border border-white/5 hover:border-acid transition-colors hover-trigger">
+                <i data-lucide="code" class="w-8 h-8 text-acid mb-4"></i>
+                <h3 class="font-display text-2xl font-bold mb-2">Web Dev</h3>
+                <p class="text-gray-400 text-sm">HTML, Tailwind, WordPress.</p>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="magnetic bg-concrete p-8 rounded-2xl border border-white/5 hover:border-acid transition-colors hover-trigger">
+                <i data-lucide="target" class="w-8 h-8 text-acid mb-4"></i>
+                <h3 class="font-display text-2xl font-bold mb-2">Performance Marketing</h3>
+                <p class="text-gray-400 text-sm">Google Ads, Meta Ads & SEO.</p>
+            </div>
+
+            <!-- Box 4 -->
+            <div class="magnetic bg-concrete p-8 rounded-2xl border border-white/5 hover:border-acid transition-colors hover-trigger md:col-span-2">
+                <i data-lucide="zap" class="w-8 h-8 text-acid mb-4"></i>
+                <h3 class="font-display text-2xl font-bold mb-2">Creative Strategy</h3>
+                <p class="text-gray-400 text-sm">Combining the visuals with the analytics to drive growth.</p>
+            </div>
+        </div>
     </section>
 
-    <!-- SCRIPTS -->
+    <!-- FOOTER -->
+    <footer class="py-20 px-6 border-t border-white/10 bg-void relative overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <h2 class="font-display text-[12vw] leading-none font-bold text-transparent hover-trigger cursor-default hacker-text" data-value="LET'S TALK" style="-webkit-text-stroke: 1px #e1e1e1;">
+                LET'S TALK
+            </h2>
+            <div class="mt-12 flex flex-col md:flex-row justify-center items-center gap-8 text-sm font-bold uppercase tracking-widest">
+                <a href="mailto:amit@unikreate.in" class="hover:text-acid transition-colors hover-trigger magnetic p-2">amitkomar8050@gmail.com</a>
+                <span class="hidden md:block text-gray-700">•</span>
+                <a href="#" class="hover:text-acid transition-colors hover-trigger magnetic p-2">Instagram</a>
+                <span class="hidden md:block text-gray-700">•</span>
+                <a href="#" class="hover:text-acid transition-colors hover-trigger magnetic p-2">LinkedIn</a>
+            </div>
+            <p class="mt-20 text-gray-600 text-xs">© 2026 Amit Kumar Nayak. The Architect.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
     <script>
-        // 1. Initialize Icons
+        // 1. Icons
         lucide.createIcons();
 
-        // 2. Custom Cursor Logic
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorOutline = document.getElementById('cursor-outline');
+        // 2. Custom Cursor
+        const cursor = document.getElementById('cursor');
         const hoverTriggers = document.querySelectorAll('.hover-trigger');
-        const projectItems = document.querySelectorAll('.project-item');
-        const preview = document.getElementById('project-preview');
 
-        // Mouse Move
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            // Dot follows instantly
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            // Outline follows with delay
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-
-            // Project Image Move (if active)
-            if(preview.classList.contains('active')) {
-                const moveX = (posX / window.innerWidth) * 20; // Subtle parallax
-                const moveY = (posY / window.innerHeight) * 20;
-                
-                preview.style.left = `${posX}px`;
-                preview.style.top = `${posY}px`;
-                preview.style.transform = `translate(-50%, -50%) scale(1) rotate(${moveX - 10}deg)`;
-            }
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
         });
 
-        // Hover States
-        hoverTriggers.forEach(trigger => {
-            trigger.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-            trigger.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        hoverTriggers.forEach(t => {
+            t.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            t.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
 
-        // 3. Project Image Reveal Logic
-        projectItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                const img = item.getAttribute('data-image');
-                preview.style.backgroundImage = `url(${img})`;
-                preview.classList.add('active');
-                document.body.classList.add('hovering');
-            });
-
-            item.addEventListener('mouseleave', () => {
-                preview.classList.remove('active');
-                document.body.classList.remove('hovering');
+        // 3. Stacking Card Effect Optimization
+        const cards = document.querySelectorAll('.card');
+        
+        window.addEventListener('scroll', () => {
+            cards.forEach((card, index) => {
+                const rect = card.getBoundingClientRect();
+                const distanceTop = rect.top;
+                if (distanceTop <= 100) {
+                    let scale = 1 - ((cards.length - index) * 0.05);
+                }
             });
         });
 
-        // 4. Reveal Text Animation on Load
+        // 4. Reveal Text on Scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -419,7 +405,86 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal-trigger').forEach(el => observer.observe(el));
+        // 5. MAGNETIC BUTTONS LOGIC
+        const magnets = document.querySelectorAll('.magnetic');
+        magnets.forEach((magnet) => {
+            magnet.addEventListener('mousemove', (e) => {
+                const rect = magnet.getBoundingClientRect();
+                // Calculate distance from center
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                
+                // Move the element towards the mouse (magnetic pull)
+                magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            
+            magnet.addEventListener('mouseleave', () => {
+                // Reset position when mouse leaves
+                magnet.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // 6. SPOTLIGHT CARD + PARALLAX IMAGE EFFECT
+        const parallaxContainers = document.querySelectorAll('.card');
+
+        parallaxContainers.forEach(container => {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Spotlight Variable Update
+                container.style.setProperty('--mouse-x', `${x}px`);
+                container.style.setProperty('--mouse-y', `${y}px`);
+
+                // 3D Parallax Logic for Image
+                const img = container.querySelector('.parallax-image');
+                if(img) {
+                    // Calculate movement (inverse to mouse)
+                    const moveX = (x - rect.width/2) * -0.05; // -0.05 strength
+                    const moveY = (y - rect.height/2) * -0.05;
+                    img.style.transform = `scale(1.1) translate(${moveX}px, ${moveY}px)`;
+                }
+            });
+
+            container.addEventListener('mouseleave', () => {
+                const img = container.querySelector('.parallax-image');
+                if(img) {
+                    img.style.transform = `scale(1.1) translate(0px, 0px)`;
+                }
+            });
+        });
+
+        // 7. HACKER TEXT SCRAMBLE EFFECT
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        document.querySelectorAll('.hacker-text').forEach(element => {
+            element.onmouseover = event => {
+                let iteration = 0;
+                const originalText = event.target.dataset.value;
+                
+                // Clear any existing interval to prevent overlap
+                clearInterval(event.target.interval);
+
+                event.target.interval = setInterval(() => {
+                    event.target.innerText = originalText
+                        .split("")
+                        .map((letter, index) => {
+                            if(index < iteration) {
+                                return event.target.dataset.value[index];
+                            }
+                            return letters[Math.floor(Math.random() * 26)];
+                        })
+                        .join("");
+
+                    if(iteration >= event.target.dataset.value.length){ 
+                        clearInterval(event.target.interval);
+                    }
+                    
+                    iteration += 1 / 3;
+                }, 30);
+            }
+        });
 
     </script>
 </body>
